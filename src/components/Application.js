@@ -1,6 +1,6 @@
 import "components/Application.scss";
 import Appointment from "components/Appointment";
-import {getAppointmentsForDay} from "helpers/selectors";
+import {getAppointmentsForDay, getInterview} from "helpers/selectors";
 import DayList from "./DayList";
 
 import React, { useState, useEffect } from "react";
