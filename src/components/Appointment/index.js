@@ -8,7 +8,7 @@ export default function Appointment(props) {
     return (props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer}/> : <Empty />);
   }
   return (
-    <div class="appointment">
+    <div className="appointment">
       <header>{props.time}</header>
      {isShowing(props)}
     </div> 
