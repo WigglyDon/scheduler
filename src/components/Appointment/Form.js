@@ -20,7 +20,7 @@ export default function Form(props) {
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
 
-        <form autocomplete="off" onSubmit={event => event.preventDefault()}>
+        <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <input
             value={student}
             onChange={(event) => setStudent(event.target.value)}

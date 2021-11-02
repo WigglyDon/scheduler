@@ -13,13 +13,27 @@ export function getAppointmentsForDay(state, day) {
   return appointments;
 }
 
+export function getInterviewersForDay(state, day) {
+  let interviewers = [];
+  
+  state.days.forEach((element) => {
+    if (element.name === day) {
+      element.interviewers.forEach((element) => {
+        if (state.interviewers[element]) {
+          interviewers.push(state.interviewers[element]);
+        }
+      });
+    }
+  });
+  return interviewers;
+}
+
 export function getInterview(state, interview) {
   let newInterview = null;
 
   if (interview) {
-    console.log("INTERVIEW", interview);
     newInterview = {
-      student: "Lydia Millasder-Jones",
+      student: "Lydia Millaasddsadsder-Jones",
       interviewer: {
         id: 1,
         name: "Sylvia Palmer",

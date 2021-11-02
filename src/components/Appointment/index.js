@@ -2,6 +2,7 @@ import React from "react";
 import "components/Appointment/styles.scss";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
+import Form from "components/Appointment/Form";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -12,20 +13,18 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  
-  function isShowing(props) {
-    {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-    {mode === SHOW && (
-      <Show
-        student={props.interview.student}
-        interviewer={props.interview.interviewer}
-      />
-    )}
-  }
+
   return (
     <div className="appointment">
       <header>{props.time}</header>
-      {isShowing(props)}
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE) } />}
+      {mode === CREATE && <Form interviewers= {props.getInterviewersForDay} onCancel= {back}/>}
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+        />
+      )}
     </div>
   );
 }
