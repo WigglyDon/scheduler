@@ -20,9 +20,10 @@ export default function Application(props) {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8001/api/days"),
-      axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers"),
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers"),
+      // axios.get("/api/debug/reset")
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
@@ -33,13 +34,53 @@ export default function Application(props) {
     });
   }, []);
 
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    return axios
+      .put(`/api/appointments/${appointment.id}`, appointment)
+      .then(() => {
+        console.log(appointments);
+        setState({
+          ...state,
+          appointments,
+        });
+      });
+  }
+
+  function cancelInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    return axios.delete(`/api/appointments/${appointment.id}`).then(() =>
+      setState({
+        ...state,
+        appointments,
+      })
+    );
+  }
+
   const setDay = (day) => setState({ ...state, day });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const listAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    console.log("INTERVIEW", interview);
     return (
       <Appointment
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
         getInterviewersForDay={getInterviewersForDay(state, state.day)}
         key={appointment.id}
         id={appointment.id}
@@ -69,7 +110,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {listAppointments}
-        <Appointment time="5pm" />
+        <Appointment bookInterview={bookInterview} time="5pm" />
       </section>
     </main>
   );
