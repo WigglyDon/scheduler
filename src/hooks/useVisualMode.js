@@ -17,7 +17,6 @@ export default function useVisualMode(initial) {
   }
 
   useEffect(() => {
-    console.log("999 x grapes", mode, history[history.length - 1])
     setMode(history[history.length - 1])
   }, [history])
 

@@ -4,7 +4,7 @@ import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
-  const [interviewer, setInterviewer] = useState(props.value || null);
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   function reset() {
     setStudent('')
@@ -16,6 +16,7 @@ export default function Form(props) {
     props.onCancel();
   }
 
+ 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -27,7 +28,7 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder="Enter Student Name"
+            placeholder="Enter Name"
         
           />
         </form>
