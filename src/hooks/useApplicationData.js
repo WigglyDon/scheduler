@@ -29,16 +29,24 @@ export default function useApplicationData(initial) {
       ...state.appointments[id],
       interview: { ...interview },
     };
+
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: appointment
     };
+
+    const selectedDay = state.days.filter(day => day.name === state.day)[0];
+    selectedDay.spots -= 1;
+    const tempDays = [...state.days];
+    tempDays[selectedDay.id - 1] = selectedDay;
+
     return axios
       .put(`/api/appointments/${appointment.id}`, appointment)
       .then(() => {
         setState({
           ...state,
           appointments,
+          days: tempDays
         });
       });
   }
@@ -52,10 +60,17 @@ export default function useApplicationData(initial) {
       ...state.appointments,
       [id]: appointment,
     };
+
+    const selectedDay = state.days.filter(day => day.name === state.day)[0];
+    selectedDay.spots += 1;
+    const tempDays = [...state.days];
+    tempDays[selectedDay.id - 1] = selectedDay;
+
     return axios.delete(`/api/appointments/${appointment.id}`).then(() =>
       setState({
         ...state,
         appointments,
+        days: tempDays
       })
     );
   }

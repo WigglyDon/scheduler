@@ -1,5 +1,7 @@
 export function getAppointmentsForDay(state, day) {
   let appointments = [];
+  
+  console.log('sdflksdjfldks', state)
 
   state.days.forEach((element) => {
     if (element.name === day) {
