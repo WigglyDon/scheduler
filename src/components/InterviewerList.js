@@ -19,7 +19,10 @@ export default function InterviewerList(props) {
     {listInterviewers}
   </ul>
 
-   
-  );
 
+  );
+  InterviewerList.propTypes = {
+    interviewers: PropTypes.array.isRequired
+  };
 }
+

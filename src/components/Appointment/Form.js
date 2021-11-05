@@ -16,6 +16,16 @@ export default function Form(props) {
     props.onCancel();
   }
 
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+  
+    setError("");
+    props.onSave(name, interviewer);
+  }
+
  
   return (
     <main className="appointment__card appointment__card--create">
@@ -28,7 +38,8 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder="Enter Name"
+            placeholder="Enter Student Name"
+            data-testid="student-name-input"
         
           />
         </form>
