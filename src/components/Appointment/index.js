@@ -29,9 +29,10 @@ export default function Appointment(props) {
     };
 
     transition(SAVING);
-    props.bookInterview(props.id, interview)
-    .then(() => transition(SHOW))
-    .catch(() => transition(CREATEERROR))
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(CREATEERROR));
   }
 
   function unsave() {
@@ -44,30 +45,33 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.cancelInterview(props.id, interview)
-    .then(() => transition(EMPTY))
-    .catch(() => transition(ERROR))
+    props
+      .cancelInterview(props.id, interview)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR));
   }
 
   function edit() {
-    transition(EDIT)
+    transition(EDIT);
   }
 
   return (
     <div className="appointment">
       <header>{props.time}</header>
-      {mode === ERROR && <Error onClose={() => transition(SHOW)}/>}
-      {mode === CREATEERROR && <Error onClose={() => transition(EMPTY)}/>}
+      {mode === ERROR && <Error onClose={() => transition(SHOW)} />}
+      {mode === CREATEERROR && <Error onClose={() => transition(EMPTY)} />}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === DELETE && <Status message={"Deleting!"} />}
-      {mode === EDIT && <Form
-      student={props.interview.student}
-      studentName={props.interview.student}
-      onSave={save}
-      interviewers={props.getInterviewersForDay}
-      onCancel={back}
-      interviewer={props.interview.interviewer.id}
-       />}
+      {mode === EDIT && (
+        <Form
+          student={props.interview.student}
+          studentName={props.interview.student}
+          onSave={save}
+          interviewers={props.getInterviewersForDay}
+          onCancel={back}
+          interviewer={props.interview.interviewer.id}
+        />
+      )}
       {mode === CONFIRM && (
         <Confirm
           message={"Really delete?"}

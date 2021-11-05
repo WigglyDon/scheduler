@@ -1,7 +1,5 @@
 import React from "react";
-
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import Form from "components/Appointment/Form";
 
 afterEach(cleanup);
@@ -48,7 +46,7 @@ it("can successfully save after trying to submit an empty student name", () => {
   expect(onSave).not.toHaveBeenCalled();
 
   fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-    target: { value: "Lydia Miller-Jones" }
+    target: { value: "Lydia Miller-Jones" },
   });
 
   fireEvent.click(getByText("Save"));
@@ -73,7 +71,7 @@ it("calls onCancel and resets the input field", () => {
   fireEvent.click(getByText("Save"));
 
   fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-    target: { value: "Lydia Miller-Jones" }
+    target: { value: "Lydia Miller-Jones" },
   });
 
   fireEvent.click(getByText("Cancel"));

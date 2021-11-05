@@ -32,10 +32,10 @@ export default function useApplicationData(initial) {
 
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [id]: appointment,
     };
 
-    const selectedDay = state.days.filter(day => day.name === state.day)[0];
+    const selectedDay = state.days.filter((day) => day.name === state.day)[0];
     selectedDay.spots -= 1;
     const tempDays = [...state.days];
     tempDays[selectedDay.id - 1] = selectedDay;
@@ -46,7 +46,7 @@ export default function useApplicationData(initial) {
         setState({
           ...state,
           appointments,
-          days: tempDays
+          days: tempDays,
         });
       });
   }
@@ -61,7 +61,7 @@ export default function useApplicationData(initial) {
       [id]: appointment,
     };
 
-    const selectedDay = state.days.filter(day => day.name === state.day)[0];
+    const selectedDay = state.days.filter((day) => day.name === state.day)[0];
     selectedDay.spots += 1;
     const tempDays = [...state.days];
     tempDays[selectedDay.id - 1] = selectedDay;
@@ -70,7 +70,7 @@ export default function useApplicationData(initial) {
       setState({
         ...state,
         appointments,
-        days: tempDays
+        days: tempDays,
       })
     );
   }

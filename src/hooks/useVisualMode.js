@@ -5,20 +5,20 @@ export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
 
   function transition(value) {
-    setHistory([ ...history, value ]);
+    setHistory([...history, value]);
   }
 
   function back() {
     if (history.length > 1) {
-      const historyCopy = [...history]
-      historyCopy.pop()
-      setHistory(historyCopy)
+      const historyCopy = [...history];
+      historyCopy.pop();
+      setHistory(historyCopy);
     }
   }
 
   useEffect(() => {
-    setMode(history[history.length - 1])
-  }, [history])
+    setMode(history[history.length - 1]);
+  }, [history]);
 
   return { mode, transition, back };
 }

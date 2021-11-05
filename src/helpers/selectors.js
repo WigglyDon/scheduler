@@ -1,7 +1,7 @@
 export function getAppointmentsForDay(state, day) {
   let appointments = [];
-  
-  console.log('sdflksdjfldks', state)
+
+  console.log("sdflksdjfldks", state);
 
   state.days.forEach((element) => {
     if (element.name === day) {
@@ -17,7 +17,7 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterviewersForDay(state, day) {
   let interviewers = [];
-  
+
   state.days.forEach((element) => {
     if (element.name === day) {
       element.interviewers.forEach((element) => {

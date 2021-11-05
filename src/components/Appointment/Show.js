@@ -1,13 +1,10 @@
 import React from "react";
 
 export default function Show(props) {
-
-  
-  function getInterviewerName(){
+  function getInterviewerName() {
     if (props.interviewer) {
-      return props.interviewer.name
-    }
-    else return "NO INTERVIEWER SELECTED YET"
+      return props.interviewer.name;
+    } else return "NO INTERVIEWER SELECTED YET";
   }
 
   return (
@@ -28,7 +25,7 @@ export default function Show(props) {
             alt="Edit"
           />
           <img
-          onClick={() => props.onDelete()}
+            onClick={() => props.onDelete()}
             className="appointment__actions-button"
             src="images/trash.png"
             alt="Delete"
@@ -37,6 +34,4 @@ export default function Show(props) {
       </section>
     </main>
   );
-
-
 }
